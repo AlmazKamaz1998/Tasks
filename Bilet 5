@@ -1,0 +1,62 @@
+package com.company;
+
+public class Main {
+    public static void main(String[] args) {
+        Base refA = new A(); // объект интерфейса Base экземпляр А
+        Base refB = new B();// объект интервейса Base экземпляр B
+        A objA = new A(); // инициализация класса А с именем objA
+        B objB = new B(); // инициализаци класса B с именем objB
+        System.out.println("1: " + refA.F(5));// вывод на консоль
+        System.out.println("2: " + refB.F(5));
+        System.out.println("3: " + objA.F(5));
+        System.out.println("4: " + objB.F(5));
+        refA = objB; // меняяем местами
+        refB = objA; // меняем местами
+        System.out.println("5: " + refA.F(5));
+        System.out.println("6: " + refB.F(5));
+    }
+}
+
+
+
+package com.company;
+
+/**
+ * Created by Алмаз on 15.06.2017.
+ */
+public interface Base { // создание интерфейса Base
+    int F(int n); // метод F
+
+}
+
+
+package com.company;
+
+/**
+ * Created by Алмаз on 15.06.2017.
+ */
+class A implements Base{ // класс А вводим implements Base чтобы он использовал интерфейс Base
+
+    public int F(int n){ //  реализует метод F
+
+        if(n==1||n==2) return n;
+
+        else return n*F(n-2);
+    }
+
+}
+
+package com.company;
+
+/**
+ * Created by Алмаз on 15.06.2017.
+ */
+class B implements Base { // класс B вводим implements Base чтобы он использовал интерфейс Base
+
+    public int F(int n) { // реализует метод F
+
+        if (n < 1) return 1;
+
+        else return n * F(n - 1);
+    }
+}
