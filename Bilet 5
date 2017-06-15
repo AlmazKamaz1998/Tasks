@@ -1,0 +1,70 @@
+package com.company;
+import java.io.*;
+
+import javax.swing.*;
+
+
+public class Main {
+
+    public static void main(String args[]) throws IOException{
+    // поля
+        String fileName;
+
+        String name;
+
+        String s;
+
+        fileName=JOptionPane.showInputDialog("Укажите имя файла:");//открывает диалоговое окно с вводом имени файла
+
+        try{ // "отслеживание" кода при возникновении исключения переходит в catch
+
+            FileInputStream fin=new FileInputStream("C:\\Users\\Алмаз\\IdeaProjects\\Five\\src\\com\\company\\Node");
+            // создание класса FileInputStream с именем fin
+            //Мы используем конструктор new FileInputStream и указываем путь к нужному файлу
+
+            BufferedReader br=new BufferedReader(new InputStreamReader(fin));//создание класса BufferReader с именем br
+           //new это ключевое слово, которое говорит компилятору создать экземпляр класса
+            //BufferedReader(new InputStreamReader(fin)) эта фраза вызывает из класса конструктор
+            // (типа схемы того, как создавать новый экземпляр класса) с параметром InputStreamReader,
+            // экземпляр которого создаётся прямо в создании переменной BufferedReader.
+                    name=JOptionPane.showInputDialog("Укажите фамилию сотрудника:");//открывает диалоговое окно с вводом фамилии
+            // цикл который выводит построчно значения из файла
+            while(true){
+
+                s=br.readLine(); // метод который позволяет считывать с файла построчно
+
+                try{ // "отслеживание" кода при возникновении исключения переходит в catch
+
+                    if(s.equalsIgnoreCase(name)){// Вывод "послужного списка"
+
+                        System.out.println("Фамилия : "+name); // вывод фамилии
+
+                        System.out.println("Имя : "+br.readLine());  // вывод имени
+
+                        System.out.println("Отчество : "+br.readLine()); // вывод Отчества
+
+                        System.out.println("Возраст : "+br.readLine());  // вывод возраста
+
+                        System.out.println("Тел. : "+br.readLine()); // вывод телефона
+
+                        break;//оператор, выходит из цикла
+                    }
+
+                }
+                catch(NullPointerException e){ //объявляеться переменная е которая имеет тип NullPointerException(нет
+                    // значения которое ввели в окно) оператор
+
+                    System.out.println("Такого сотрудника нет!");//вывод на консоль
+
+                    break; // оператор, выход с оператора catch
+                }
+            }
+            //файл Fin закрыватеся (метод)
+            fin.close();
+
+        }catch(FileNotFoundException e){ //объявляется переменая е которая имеет тип FileNotFoundException(файл не наден)
+            // оператор
+
+            System.out.println("Ошибка доступа к файлу: "+e);} //вывод на консоль + тип ошибки
+
+        System.exit(0);}}
